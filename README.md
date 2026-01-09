@@ -1,74 +1,59 @@
-# Kecerdasan-Komputasional
-## Deskripsi
-Kecerdasan-Komputasional adalah kumpulan skrip dan modul Python untuk eksperimen dengan algoritma pembelajaran mesin dan metode optimasi (mis. neural network, evolutionary algorithms, dan fuzzy logic). Repo ini dirancang untuk cepat melakukan pelatihan, inferensi, dan evaluasi pada dataset tabular atau file CSV.
+# Tugas Kecerdasan Komputasional (Python)
 
-## Fitur
-- Pipeline sederhana untuk pelatihan, validasi, dan inferensi
-- Skrip contoh untuk training, evaluasi, dan prediksi
-- Konfigurasi lewat file YAML/JSON
-- Logging dan checkpoint model
+Repository ini berisi kumpulan kode implementasi algoritma untuk mata kuliah **Kecerdasan Komputasional**.
+**Author**: Zainul Mutawakkil
 
-## Persyaratan
-- Python 3.13
-- Paket akan dicantumkan di requirements.txt (contoh: numpy, pandas, scikit-learn, torch/tensorflow jika diperlukan)
+## Struktur Direktori
 
-## Instalasi
-1. Clone repo:
-    git clone <repo-url>
-2. Buat virtual environment dan aktifkan:
-    python -m venv .venv
-    source .venv/bin/activate  # Linux/macOS
-    .venv\Scripts\activate     # Windows
-3. Install dependency:
-    pip install -r requirements.txt
+### 1. Algoritma Genetika (Genetic Algorithm)
+Folder: `Algoritma Genetika/`
 
-## Struktur proyek (singkat)
-- ann.py            
-- reggesion.py      
-- datasheet.py      
-- ann_output/       
-- datasheet/        
-- diagram_output/   
+Berisi implementasi Algoritma Genetika untuk menyelesaikan masalah optimasi:
 
-## Cara penggunaan
-Menyalakan env:
+- **[jadwal_ga.py](./Algoritma%20Genetika/jadwal_ga.py)**: 
+  - **Tujuan**: Menyusun jadwal 3 mata kuliah (A, B, C) dalam 1 ruangan tanpa bentrok.
+  - **Constraints**: 
+    1. Tidak boleh ada jadwal yang overlap.
+    2. Mata Kuliah A (Prof. X) harus selesai sebelum jam 10.00 pagi.
+  - **Metode**: Evolusi populasi waktu mulai (start time) hingga ditemukan solusi valid.
+
+- **[Evo.py](./Algoritma%20Genetika/Evo.py)**:
+  - **Tujuan**: Mendemonstrasikan evolusi string sederhana.
+  - **Target**: Membentuk string "ZAINUL MUTAWAKKIL" dari string acak.
+  - **Metode**: Mutasi karakter acak dan seleksi berdasarkan kesamaan huruf dengan target.
+
+### 2. Jaringan Syaraf Tiruan (Artificial Neural Network)
+File Root Directory
+
+Berisi implementasi ANN menggunakan TensorFlow/Keras untuk kasus regresi (Prediksi Superchat):
+
+- **[ann.py](./ann.py)**:
+  - **Deskripsi**: Script utama untuk melatih model ANN.
+  - **Fitur**: 
+    - Load dataset (`channels.csv`, `chat_stats.csv`, `superchat_stats.csv`).
+    - Preprocessing & Feature Engineering.
+    - Arsitektur ANN (Dense layers + Dropout).
+    - Visualisasi Training Loss & MAE.
+    - Evaluasi Model (R-squared, MAE).
+  - **Output**: Model disimpan sebagai `ann_superchat_model.h5` di folder `ann_outputs/`.
+
+- **[reggesion.py](./reggesion.py)**:
+  - **Deskripsi**: Versi alternatif/awal untuk prediksi regresi Superchat.
+  - **Fitur**: Mirip dengan `ann.py`, menggunakan Sequential Model untuk memprediksi `totalSC`.
+
+## Cara Menjalankan
+
+### Menjalankan Algoritma Genetika
+Masuk ke folder dan jalankan script:
 ```bash
-.venv\Scripts\activate
+cd "Algoritma Genetika"
+python3 jadwal_ga.py
+# atau
+python3 Evo.py
 ```
 
-Instal dependency:
+### Menjalankan ANN
+Pastikan dependency terinstall (`tensorflow`, `pandas`, `numpy`, `scikit-learn`, `matplotlib`).
 ```bash
-pip install -r requirements.txt
+python3 ann.py
 ```
-
-Menjalankan script python:
-```bash
-python ann.py
-```
-
-## Format data
-- Format umum: CSV
-- Kolom fitur (numerik/one-hot), kolom target bernama sesuai config (mis. "label")
-- Pastikan missing value ditangani atau script preprocessing dijalankan
-
-## Evaluasi & metrik
-- Binary/Multiclass: accuracy, precision, recall, f1
-- Regression: MAE, MSE, R2
-- Hasil evaluasi dicatat ke log dan file CSV di folder results/
-
-## Tips & troubleshooting
-- Pastikan versi Python dan dependency sesuai requirements.txt
-- Periksa path file di config
-- Cek log untuk stacktrace jika proses berhenti
-- Untuk GPU, pastikan driver dan framework (CUDA) cocok
-
-## Kontribusi
-- Buka issue untuk bug/fitur
-- Fork repo, buat branch fitur, kirim pull request
-- Ikuti format test dan code style (black/isort jika disediakan)
-
-## Lisensi
-Distribusi di bawah lisensi MIT. Lihat file LICENSE untuk detail.
-
-## Kontak
-Untuk pertanyaan, buka issue di repository.
